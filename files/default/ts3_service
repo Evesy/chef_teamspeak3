@@ -1,0 +1,12 @@
+[Unit]
+Description=Teamspeak 3
+
+[Service]
+Type=oneshot
+ExecStart=/home/teamspeak/ts3ctl start
+ExecStop=/home/teamspeak/ts3ctl stop
+RemainAfterExit=yes
+User=teamspeak
+
+[Install]
+WantedBy=multi-user.target
