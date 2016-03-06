@@ -28,29 +28,30 @@ end
 
 # Download & extract teamspeak package
 
+unless File.exist? "#{install_dir}/ts3server"
+	remote_file "#{install_dir}/#{package}.tar.bz2" do
+		source "http://dl.4players.de/ts/releases/#{node['ts3']['version']}/#{package}.tar.bz2"
+		owner "teamspeak"
+		group "teamspeak"
+	end
 
-remote_file "#{install_dir}/#{package}.tar.bz2" do
-	source "http://dl.4players.de/ts/releases/#{node['ts3']['version']}/#{package}.tar.bz2"
-	owner "teamspeak"
-	group "teamspeak"
-end
+	execute "Extract package" do
+		command "tar xvfj #{package}.tar.bz2 --strip 1"
+		cwd "#{install_dir}"
+	end
 
-execute "Extract package" do
-	command "tar xvfj #{package}.tar.bz2 --strip 1"
-	cwd "#{install_dir}"
-end
+	# Cleanup tar file & remove default startup
+	file "#{install_dir}/#{package}.tar.bz2" do
+		action :delete
+	end
 
-# Cleanup tar file & remove default startup
-file "#{install_dir}/#{package}.tar.bz2" do
-	action :delete
-end
+	file "#{install_dir}/ts3server_minimal_runscript.sh" do
+		action :delete
+	end
 
-file "#{install_dir}/ts3server_minimal_runscript.sh" do
-	action :delete
-end
-
-file "#{install_dir}/ts3server_startscript.sh" do
-	action :delete
+	file "#{install_dir}/ts3server_startscript.sh" do
+		action :delete
+	end
 end
 
 # Create server ini file from template

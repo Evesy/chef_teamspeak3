@@ -3,6 +3,10 @@ chef_teamspeak3 CHANGELOG
 
 This file is used to list changes made in each version of the chef_teamspeak3 cookbook.
 
+0.1.2
+-----
+- [Mike Eves] - Skip dl & extract steps if teamspeak binary is already present as install has presumably already been completed
+
 0.1.1
 -----
 - [Mike Eves] - Make install directory an attribute rather than hard defined
