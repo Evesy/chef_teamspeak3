@@ -3,8 +3,8 @@ Description=Teamspeak 3
 
 [Service]
 Type=oneshot
-ExecStart=/home/teamspeak/ts3ctl start
-ExecStop=/home/teamspeak/ts3ctl stop
+ExecStart=<%= node['ts3']['install_dir'] %>/ts3ctl start
+ExecStop=<%= node['ts3']['install_dir'] %>/ts3ctl stop
 RemainAfterExit=yes
 User=teamspeak
 

@@ -9,19 +9,27 @@
 
 include_recipe "chef_teamspeak3::bzip2"
 
+package = "teamspeak3-server_linux_amd64-#{node['ts3']['version']}"
+install_dir = "#{node['ts3']['install_dir']}"
+
 # Create teamspeak user & set non interactive shell
 user "teamspeak" do
 	action :create
 	comment "Teamspeak User"
 	shell "/sbin/nologin"
-	home "/home/teamspeak"
+end
+
+directory "#{install_dir}" do
+	action :create
+	owner "teamspeak"
+	group "teamspeak"
+	mode "0740"
 end
 
 # Download & extract teamspeak package
 
-package = "teamspeak3-server_linux_amd64-#{node['ts3']['version']}"
 
-remote_file "/home/teamspeak/#{package}.tar.bz2" do
+remote_file "#{install_dir}/#{package}.tar.bz2" do
 	source "http://dl.4players.de/ts/releases/#{node['ts3']['version']}/#{package}.tar.bz2"
 	owner "teamspeak"
 	group "teamspeak"
@@ -29,27 +37,36 @@ end
 
 execute "Extract package" do
 	command "tar xvfj #{package}.tar.bz2 --strip 1"
-	cwd "/home/teamspeak"
+	cwd "#{install_dir}"
 end
 
 # Cleanup tar file & remove default startup
-file "/home/teamspeak/#{package}.tar.bz2" do
+file "#{install_dir}/#{package}.tar.bz2" do
 	action :delete
 end
 
-file "/home/teamspeak/ts3server_minimal_runscript.sh" do
+file "#{install_dir}/ts3server_minimal_runscript.sh" do
 	action :delete
 end
 
-file "/home/teamspeak/ts3server_startscript.sh" do
+file "#{install_dir}/ts3server_startscript.sh" do
 	action :delete
 end
 
 # Create server ini file from template
-template "/home/teamspeak/server.ini" do
+template "#{install_dir}/server.ini" do
 	source "server.ini.erb"
 	owner "teamspeak"
 	group "teamspeak"
 	mode "0644"
 
 end
+
+# Provide our own control script to ensure server.ini is being passed
+cookbook_file "#{install_dir}/ts3ctl" do
+	source "ts3_ctl"
+        owner "teamspeak"
+        group "teamspeak"
+        mode "0744"
+end
+                                 
