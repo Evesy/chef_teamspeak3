@@ -29,7 +29,24 @@ Attributes
     <td>Install directory</td>
     <td><tt>/teamspeak</tt></td>
   </tr>
-
+  <tr>
+    <td><tt>['ts3']['voice_port']</tt></td>
+    <td>Integer</td>
+    <td>Voice port</td>
+    <td><tt>9987</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['ts3']['filetransfer_port']</tt></td>
+    <td>Integer</td>
+    <td>File trasnfer port</td>
+    <td><tt>30033</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['ts3']['query_port']</tt></td>
+    <td>Integer</td>
+    <td>Server query port</td>
+    <td><tt>10011</tt></td>
+  </tr>
 </table>
 
 Usage
@@ -53,7 +70,7 @@ Required by `chef_teamspeak3::default`
 
 #### chef_teamspeak3::ts3ctl
 
-Optional recipe that creates custom control script & systemd service for TS3
+Optional recipe that creates & enables systemd service for Teamspeak
 
 Contributing
 ------------

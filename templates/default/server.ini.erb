@@ -1,10 +1,10 @@
 machine_id=
-default_voice_port=9987
+default_voice_port=<%= node["ts3"]["voice_port"] %>
 voice_ip=<%= node["ipaddress"] %>
 licensepath=
-filetransfer_port=30033
+filetransfer_port=<%= node["ts3"]["filetransfer_port"] %>
 filetransfer_ip=<%= node["ipaddress"] %>
-query_port=10011
+query_port=<%= node["ts3"]["query_port"] %>
 query_ip=<%= node["ipaddress"] %>
 query_ip_whitelist=query_ip_whitelist.txt
 query_ip_blacklist=query_ip_blacklist.txt
