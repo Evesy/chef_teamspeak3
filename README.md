@@ -1,7 +1,7 @@
 chef_teamspeak3 Cookbook
 ========================
 
-A very rudimentry cookbook to provides a basic Teamspeak3 server install for Fedora/RHEL/CentOS distros (64 bit only atm).
+A very rudimentry cookbook to provides a basic Teamspeak3 server install on RHEL or Debian based distributions. 32 bit currently not supported.
 
 Requirements
 ------------
@@ -53,7 +53,7 @@ Usage
 -----
 #### chef_teamspeak3::default
 
-Edit version attribute to change teamspeak version that will be installed
+Attributes can be changed to adjust the install to your liking
 Include `chef_teamspeak3` in your node's `run_list`:
 
 ```json
@@ -66,11 +66,16 @@ Include `chef_teamspeak3` in your node's `run_list`:
 ```
 #### chef_teamspeak3::bzip2
 
-Required by `chef_teamspeak3::default`
+Required by `chef_teamspeak3::default`, ensures bzip2 package is installed
 
 #### chef_teamspeak3::ts3ctl
 
-Optional recipe that creates & enables systemd service for Teamspeak
+Optional recipe that will create a service for Teamspeak (Ran as the teamspeak user) and enable it at runtime:
+
+`Debian: $ /etc/init.d/teamspeak (start|stop|restart|status)`
+`RHEL: $ systemctl (stop|start|reload|status) teamspeak`
+
+(Alternatively, just call ts3ctl (start|stop|restart|status) from within the Teamspeak install directory
 
 Contributing
 ------------

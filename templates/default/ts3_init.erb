@@ -1,0 +1,33 @@
+#!/bin/bash
+### BEGIN INIT INFO
+# Provides: teamspeak
+# Required-Start: $local_fs $network
+# Required-Stop: $local_fs $network
+# Default-Start: 2 3 4 5
+# Default-Stop: 0 1 6
+# Description: Teamspeak 3 Server
+### END INIT INFO
+
+user="teamspeak"
+install_dir="<%= node['ts3']['install_dir'] %>"
+###### Teamspeak 3 server start/stop script ######
+case "$1" in
+start)
+su -s /bin/bash $user -c "${install_dir}/ts3ctl start"
+;;
+stop)
+su -s /bin/bash $user -c "${install_dir}/ts3ctl stop"
+;;
+restart)
+su -s /bin/bash $user -c "${install_dir}/ts3ctl restart"
+;;
+status)
+su -s /bin/bash $user -c "${install_dir}/ts3ctl status"
+;;
+*)
+echo "Usage: " >&2
+exit 1
+;;
+esac
+exit 0
+

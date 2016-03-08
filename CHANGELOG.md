@@ -3,6 +3,10 @@ chef_teamspeak3 CHANGELOG
 
 This file is used to list changes made in each version of the chef_teamspeak3 cookbook.
 
+0.1.5
+-----
+- [Mike Eves] - Now supports Debian based distros
+
 0.1.4
 -----
 - [Mike Eves] - Have service ports as an attribute
