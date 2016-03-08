@@ -1,7 +1,7 @@
 chef_teamspeak3 Cookbook
 ========================
 
-A very rudimentry cookbook to provides a basic Teamspeak3 server install for Fedora/RHEL/CentOS distros (Currently only supports x86 platforms).
+A very rudimentry cookbook to provides a basic Teamspeak3 server install for Fedora/RHEL/CentOS distros (64 bit only atm).
 
 Requirements
 ------------
@@ -23,6 +23,13 @@ Attributes
     <td>Teamspeak version</td>
     <td><tt>3.0.12.3</tt></td>
   </tr>
+  <tr>
+    <td><tt>['ts3']['install_dir']</tt></td>
+    <td>String</td>
+    <td>Install directory</td>
+    <td><tt>/teamspeak</tt></td>
+  </tr>
+
 </table>
 
 Usage

@@ -5,6 +5,6 @@ template "/usr/lib/systemd/system/teamspeak.service" do
 end
 
 # Add teamspeak to startup
-link "/etc/systemd/system/multi-user.target.wants/teamspeak.service" do
-	to "/usr/lib/systemd/system/teamspeak.service"
+service "teamspeak" do
+	action :enable
 end

@@ -3,6 +3,10 @@ chef_teamspeak3 CHANGELOG
 
 This file is used to list changes made in each version of the chef_teamspeak3 cookbook.
 
+0.1.3
+-----
+- [Mike Eves] - Chef provides a resource to manage services, might as well use that to enable teamspeak service
+
 0.1.2
 -----
 - [Mike Eves] - Skip dl & extract steps if teamspeak binary is already present as install has presumably already been completed
