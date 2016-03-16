@@ -3,6 +3,13 @@ chef_teamspeak3 CHANGELOG
 
 This file is used to list changes made in each version of the chef_teamspeak3 cookbook.
 
+0.1.6
+-----
+- [Mike Eves] - Make changes suggested by foodcritic:
+	1. FC002, changed a number of attributes that did not need to be quoted
+	2. FC005, rolled file cleanups into a single resource
+	3. FC064/065, added source & issue URL's into metadata
+
 0.1.5
 -----
 - [Mike Eves] - Now supports Debian based distros

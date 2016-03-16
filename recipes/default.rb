@@ -10,7 +10,7 @@
 include_recipe "chef_teamspeak3::bzip2"
 
 package = "teamspeak3-server_linux_amd64-#{node['ts3']['version']}"
-install_dir = "#{node['ts3']['install_dir']}"
+install_dir = node['ts3']['install_dir']
 
 # Create teamspeak user & set non interactive shell
 user "teamspeak" do
@@ -19,7 +19,7 @@ user "teamspeak" do
 	shell "/sbin/nologin"
 end
 
-directory "#{install_dir}" do
+directory install_dir do
 	action :create
 	owner "teamspeak"
 	group "teamspeak"
@@ -37,20 +37,14 @@ unless File.exist? "#{install_dir}/ts3server"
 
 	execute "Extract package" do
 		command "tar xvfj #{package}.tar.bz2 --strip 1"
-		cwd "#{install_dir}"
+		cwd install_dir
 	end
 
 	# Cleanup tar file & remove default startup
-	file "#{install_dir}/#{package}.tar.bz2" do
-		action :delete
-	end
-
-	file "#{install_dir}/ts3server_minimal_runscript.sh" do
-		action :delete
-	end
-
-	file "#{install_dir}/ts3server_startscript.sh" do
-		action :delete
+	["#{install_dir}/#{package}.tar.bz2", "#{install_dir}/ts3server_minimal_runscript.sh", "#{install_dir}/ts3server_startscript.sh"].each do |i|
+		file i do
+			action :delete
+		end 	
 	end
 end
 
